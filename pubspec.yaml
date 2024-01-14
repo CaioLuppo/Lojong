@@ -1,0 +1,27 @@
+name: lojong
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  cached_network_image: ^3.3.1
+  chucker_flutter: ^1.6.2
+  dio: ^5.4.0
+  dio_cache_interceptor: ^3.5.0
+  flutter:
+    sdk: flutter
+  # flutter_html: ^2.2.1
+  flutter_svg: ^2.0.9
+
+dev_dependencies:
+  flutter_lints: ^3.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
