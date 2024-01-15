@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
+import 'package:lojong/page_navigator/view/page_navigator.view.dart';
+import 'package:lojong/src/colors.dart';
+import 'package:lojong/src/theme.dart';
+
 void main() {
-  runApp(const MainApp());
+  runApp(const LojongApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class LojongApp extends StatelessWidget {
+  const LojongApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: LojongThemeData.theme,
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+        body: Container(
+          color: LojongColors.background,
+          child: const SafeArea(
+            child: PageNavigator(),
+          ),
         ),
       ),
     );

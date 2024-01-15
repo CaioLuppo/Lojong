@@ -6,22 +6,27 @@ class LojongAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      centerTitle: true,
-      title: Text(
-        "inspirações".toUpperCase(),
-        style: const TextStyle(
-          fontFamily: "Asap",
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 8.0,
+        left: 8.0,
+        right: 8.0,
       ),
-      leading: IconButton(
-        onPressed: null,
-        icon: LojongIcons.arrowBack,
-        style: const ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.black12)
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text(
+          "inspirações".toUpperCase(),
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall
+              ?.copyWith(color: Colors.white),
+        ),
+        leading: IconButton(
+          onPressed: null,
+          icon: LojongIcons.arrowBack,
+          style: const ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Colors.black12)),
         ),
       ),
     );
