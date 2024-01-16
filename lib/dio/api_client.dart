@@ -4,11 +4,11 @@ import "package:flutter/widgets.dart";
 
 class Client {
   final _token = "O7Kw5E2embxod5YtL1h1YsGNN7FFN8wIxPYMg6J9zFjE6Th9oDssEsFLVhxf";
-  static final Dio dio = Dio();
+  static final Dio _dio = Dio();
 
   Dio init() {
-    dio.options.baseUrl = "https://applojong.com/api";
-    dio.options.headers = {
+    _dio.options.baseUrl = "https://applojong.com/api";
+    _dio.options.headers = {
       "Authorization": "Bearer $_token",
     };
     final options = CacheOptions(
@@ -18,9 +18,9 @@ class Client {
       hitCacheOnErrorExcept: [401, 404],
       maxStale: const Duration(days: 7),
     );
-    dio.interceptors.add(DioCacheInterceptor(options: options));
-    dio.interceptors.add(ApiInterceptors());
-    return dio;
+    _dio.interceptors.add(DioCacheInterceptor(options: options));
+    _dio.interceptors.add(ApiInterceptors());
+    return _dio;
   }
 }
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lojong/dio/api_client.dart';
-import 'package:lojong/dio/repository/video_repository.dart';
 import 'package:lojong/src/colors.dart';
 import 'package:lojong/videos/components/video_element.dart';
+import 'package:lojong/videos/viewmodel/videos.viewmodel.dart';
 
 class VideosPage extends StatelessWidget {
   const VideosPage({super.key});
@@ -10,7 +9,7 @@ class VideosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: VideoRepository(Client().init()).getAll(),
+      future: VideoViewModel().getAll(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
@@ -19,7 +18,8 @@ class VideosPage extends StatelessWidget {
                 separatorBuilder: (context, index) {
                   return const SizedBox(height: 40);
                 },
-                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   final video = snapshot.data![index];
