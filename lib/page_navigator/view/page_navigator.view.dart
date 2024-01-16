@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojong/page_navigator/components/lojong_appbar.dart';
 import 'package:lojong/page_navigator/components/page_slider.dart';
+import 'package:lojong/videos/view/videos.view.dart';
 
 class PageNavigator extends StatefulWidget {
   const PageNavigator({super.key});
@@ -13,7 +14,7 @@ class _PageNavigatorState extends State<PageNavigator>
     with SingleTickerProviderStateMixin {
   late final TabController _controller;
   final List<Widget> _tabsBody = [
-    Container(),
+    const VideosPage(),
     Container(),
     Container(),
   ];
@@ -37,8 +38,11 @@ class _PageNavigatorState extends State<PageNavigator>
         Expanded(
           child: Container(
             clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
               color: Colors.white,
             ),
             child: TabBarView(

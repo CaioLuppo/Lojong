@@ -7,4 +7,8 @@ abstract class LojongIcons {
     "$_path/arrow_back.svg",
     width: 14,
   );
+  static final playButton = SvgPicture.asset(
+    "$_path/play.svg",
+    width: 56,
+  );
 }
