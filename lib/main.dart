@@ -1,9 +1,11 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:lojong/page_navigator/view/page_navigator.view.dart';
 import 'package:lojong/src/colors.dart';
 import 'package:lojong/src/theme.dart';
 
 void main() {
+  ChuckerFlutter.showOnRelease = false;
   runApp(const LojongApp());
 }
 
@@ -13,6 +15,7 @@ class LojongApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorObservers: [ChuckerFlutter.navigatorObserver],
       theme: LojongThemeData.theme,
       home: Scaffold(
         body: Container(

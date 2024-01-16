@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:lojong/videos/components/video_element.dart';
-import 'package:lojong/videos/view_model/videos.viewmodel.dart';
+import 'package:lojong/articles/components/article_element.dart';
+import 'package:lojong/articles/view_model/articles.viewmodel.dart';
+import 'package:lojong/components/loading.dart';
+import 'package:lojong/components/session_error_message.dart';
+import 'package:lojong/src/strings.dart';
 
-import '../../components/loading.dart';
-
-class VideosPage extends StatelessWidget {
-  const VideosPage({super.key});
+class ArticlesPage extends StatelessWidget {
+  const ArticlesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: VideosViewModel().getAll(),
+      future: ArticlesViewModel().getAllListElements(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
@@ -20,18 +21,19 @@ class VideosPage extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  final video = snapshot.data![index];
-                  return VideoElement(video);
+                  final article = snapshot.data![index];
+                  return ArticleElement(article);
                 },
               );
             } else {
-              return const Center(
-                child: Text("Ainda não há vídeos!"),
+              return const SessionErrorMessage(
+                message: LojongStrings.noArticles,
+                showReolad: false,
               );
             }
           } else {
-            return const Center(
-              child: Text("Não foi possível carregar nenhum vídeo..."),
+            return const SessionErrorMessage(
+              message: LojongStrings.networkError,
             );
           }
         } else {

@@ -2,7 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lojong/model/video.model.dart';
 import 'package:lojong/src/assets.dart';
-import 'package:lojong/src/colors.dart';
+
+import '../../components/thumb_place_holder.dart';
 
 class VideoThumbNail extends StatelessWidget {
   const VideoThumbNail({
@@ -19,20 +20,9 @@ class VideoThumbNail extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: video.imageUrl,
         fadeOutDuration: const Duration(milliseconds: 300),
-        placeholder: (context, url) => Container(
-          height: 192,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: LojongColors.text,
-          ),
-          child: const Center(
-            child: CircularProgressIndicator(
-              color: Colors.white60,
-            ),
-          ),
-        ),
-        imageBuilder: (context, imageProvider) => InkWell(
+        placeholder: (_, __) => const ThumbPlaceHolder(),
+        errorWidget: (_, __, ___) => const ThumbPlaceHolder(error: true),
+        imageBuilder: (_, imageProvider) => InkWell(
           onTap: null,
           child: Stack(
             children: [
