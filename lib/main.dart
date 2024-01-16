@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:lojong/page_navigator/view/page_navigator.view.dart';
 import 'package:lojong/src/colors.dart';
 import 'package:lojong/src/theme.dart';
