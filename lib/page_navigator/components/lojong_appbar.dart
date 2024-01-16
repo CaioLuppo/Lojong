@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lojong/src/assets.dart';
 
 class LojongAppBar extends StatelessWidget {
@@ -24,7 +25,10 @@ class LojongAppBar extends StatelessWidget {
         ),
         leading: IconButton(
           onPressed: null,
-          icon: LojongIcons.arrowBack,
+          icon: SvgPicture.asset(
+            LojongIcons.arrowBack,
+            height: 14,
+          ),
           style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(Colors.black12)),
         ),

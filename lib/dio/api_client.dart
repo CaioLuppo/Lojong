@@ -14,7 +14,6 @@ class Client {
     final options = CacheOptions(
       store: MemCacheStore(),
       policy: CachePolicy.refreshForceCache,
-      priority: CachePriority.high,
       hitCacheOnErrorExcept: [401, 404],
       maxStale: const Duration(days: 7),
     );

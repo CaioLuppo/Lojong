@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lojong/model/video.model.dart';
 import 'package:lojong/src/assets.dart';
 
@@ -35,7 +36,10 @@ class VideoThumbNail extends StatelessWidget {
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.center,
-                  child: LojongIcons.playButton,
+                  child: SvgPicture.asset(
+                    LojongIcons.playButton,
+                    height: 56,
+                  ),
                 ),
               ),
             ],

@@ -16,6 +16,12 @@ abstract class LojongThemeData {
           fontSize: 16,
           color: LojongColors.text
         ),
+        titleMedium: TextStyle(
+          fontFamily: "Asap",
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: LojongColors.text,
+        )
       ),
     );
   }

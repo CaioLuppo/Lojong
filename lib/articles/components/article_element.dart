@@ -15,9 +15,7 @@ class ArticleElement extends StatelessWidget {
       children: [
         Text(
           "ARTIGO ${article.title.toUpperCase()}",
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                fontSize: 18,
-              ),
+          style: Theme.of(context).textTheme.titleMedium,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),

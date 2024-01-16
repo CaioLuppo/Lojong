@@ -14,7 +14,7 @@ class Loading extends StatelessWidget {
       children: [
         Text(
           "Carregando".toUpperCase(),
-          style: Theme.of(context).textTheme.displaySmall,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 16),
         const CircularProgressIndicator(color: LojongColors.background),

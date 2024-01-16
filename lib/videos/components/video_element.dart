@@ -15,9 +15,7 @@ class VideoElement extends StatelessWidget {
       children: [
         Text(
           "EP. ${_getString()}: ${video.name.toUpperCase()}",
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                fontSize: 18,
-              ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 16),
         VideoThumbNail(video: video),

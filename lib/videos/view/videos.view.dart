@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:lojong/components/session_error_message.dart';
+import 'package:lojong/src/strings.dart';
 import 'package:lojong/videos/components/video_element.dart';
 import 'package:lojong/videos/view_model/videos.viewmodel.dart';
 
 import '../../components/loading.dart';
 
-class VideosPage extends StatelessWidget {
+class VideosPage extends StatefulWidget {
   const VideosPage({super.key});
 
+  @override
+  State<VideosPage> createState() => _VideosPageState();
+}
+
+class _VideosPageState extends State<VideosPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -25,13 +32,12 @@ class VideosPage extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
-                child: Text("Ainda não há vídeos!"),
-              );
+              return const SessionErrorMessage(message: "Ainda não há vídeos!");
             }
           } else {
-            return const Center(
-              child: Text("Não foi possível carregar nenhum vídeo..."),
+            return SessionErrorMessage(
+              message: LojongStrings.networkError,
+              reloadFunction: () => setState(() {}),
             );
           }
         } else {
