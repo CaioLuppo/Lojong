@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojong/model/video.model.dart';
 
-import 'share_button.dart';
+import '../../components/share_button.dart';
 import 'video_thumb_nail.dart';
 
 class VideoElement extends StatelessWidget {

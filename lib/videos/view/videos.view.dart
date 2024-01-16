@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lojong/src/colors.dart';
 import 'package:lojong/videos/components/video_element.dart';
-import 'package:lojong/videos/viewmodel/videos.viewmodel.dart';
+import 'package:lojong/videos/view_model/videos.viewmodel.dart';
+
+import '../../components/loading.dart';
 
 class VideosPage extends StatelessWidget {
   const VideosPage({super.key});
@@ -37,18 +38,7 @@ class VideosPage extends StatelessWidget {
             );
           }
         } else {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Carregando vídeos".toUpperCase(),
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              const SizedBox(height: 16),
-              const CircularProgressIndicator(color: LojongColors.background),
-            ],
-          );
+          return const Loading();
         }
       },
     );
