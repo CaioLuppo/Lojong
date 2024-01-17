@@ -16,7 +16,7 @@ class QuotesPage extends StatefulWidget {
 
 class _QuotesPageState extends State<QuotesPage> {
   final ScrollController scrollController = ScrollController();
-  int page = 1;
+  static int page = 1;
   bool addedListener = false;
 
   @override
