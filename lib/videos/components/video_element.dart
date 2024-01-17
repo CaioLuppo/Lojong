@@ -14,14 +14,14 @@ class VideoElement extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "EP. ${_getString()}: ${video.name.toUpperCase()}",
+          "EP. ${_getString()}: ${video.name?.toUpperCase()}",
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 16),
         VideoThumbNail(video: video),
         const SizedBox(height: 8),
         Text(
-          video.description,
+          video.description ?? "",
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
@@ -32,10 +32,11 @@ class VideoElement extends StatelessWidget {
   }
 
   String _getString() {
-    String id = video.orderId.toString();
-    if (video.orderId < 10) {
-      id = "0${video.orderId}";
+    int id = video.orderId ?? 0;
+    String stringId = id.toString();
+    if (id < 10) {
+      stringId = "0$id";
     }
-    return id;
+    return stringId;
   }
 }

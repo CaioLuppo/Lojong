@@ -19,7 +19,7 @@ class VideoThumbNail extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: CachedNetworkImage(
-        imageUrl: video.imageUrl,
+        imageUrl: video.imageUrl ?? "",
         fadeOutDuration: const Duration(milliseconds: 300),
         placeholder: (_, __) => const ThumbPlaceHolder(),
         errorWidget: (_, __, ___) => const ThumbPlaceHolder(error: true),
