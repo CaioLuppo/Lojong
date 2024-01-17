@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lojong/components/session_error_message.dart';
+import 'package:lojong/dio/api_client.dart';
 import 'package:lojong/src/strings.dart';
 import 'package:lojong/videos/components/video_element.dart';
 import 'package:lojong/videos/view_model/videos.viewmodel.dart';
@@ -17,7 +18,7 @@ class _VideosPageState extends State<VideosPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: VideosViewModel().getAll(),
+      future: VideosViewModel(Client().init()).getAll(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {

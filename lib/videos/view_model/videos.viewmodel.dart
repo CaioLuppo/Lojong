@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:lojong/dio/api_client.dart';
 import 'package:lojong/model/video.model.dart';
 
 class VideosViewModel {
-  final Dio _client = Client().init();
+  final Dio _client;
+
+  VideosViewModel(this._client);
 
   Future<List<Video>> getAll() async {
     final videoList = <Video>[];
