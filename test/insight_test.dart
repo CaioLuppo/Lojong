@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lojong/insight/viewmodel/insight.viewmodel.dart';
-import 'package:lojong/videos/view_model/videos.viewmodel.dart';
 import 'package:mocktail/mocktail.dart';
 
 class DioErrorMock extends Mock implements Dio {
