@@ -7,39 +7,29 @@ import 'package:provider/provider.dart';
 class ArticlesViewModel with ChangeNotifier {
   final Dio _client = Client().init();
 
-  static bool gotPages = false;
+  static bool didRequest = false;
+  bool error = false;
   int pages = 1;
-  int currentPage = 1;
 
-  Future<List<ArticleElementModel>> getAllListElements(
-      BuildContext context, int page) async {
-    final articlesList = <ArticleElementModel>[];
+  List<ArticleElementModel> articles = [];
+
+  Future<void> loadArticlesFromPage(BuildContext context, int page) async {
     final response = await _client.get("/articles2?page=$page");
-    if (context.mounted && !gotPages) {
-      gotPages = true;
+    if (context.mounted && !didRequest) {
+      didRequest = true;
       final provider = Provider.of<ArticlesViewModel>(context, listen: false);
       provider.updatePages(response.data["last_page"]);
     }
     for (Map<String, dynamic> article in response.data["list"]) {
-      articlesList.add(
+      articles.add(
         ArticleElementModel.fromMap(article),
       );
     }
-    return articlesList;
+    notifyListeners();
   }
 
   void updatePages(int pages) {
     this.pages = pages;
-    notifyListeners();
-  }
-
-  void previousPage() {
-    currentPage--;
-    notifyListeners();
-  }
-
-  void nextPage() {
-    currentPage++;
     notifyListeners();
   }
 }

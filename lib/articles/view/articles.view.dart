@@ -3,10 +3,9 @@ import 'package:lojong/articles/components/article_element.dart';
 import 'package:lojong/articles/view_model/articles.viewmodel.dart';
 import 'package:lojong/components/loading.dart';
 import 'package:lojong/components/session_error_message.dart';
+import 'package:lojong/src/colors.dart';
 import 'package:lojong/src/strings.dart';
 import 'package:provider/provider.dart';
-
-import '../../components/session_page_slider.dart';
 
 class ArticlesPage extends StatefulWidget {
   const ArticlesPage({super.key});
@@ -16,68 +15,66 @@ class ArticlesPage extends StatefulWidget {
 }
 
 class _ArticlesPageState extends State<ArticlesPage> {
+  final ScrollController scrollController = ScrollController();
+  int page = 1;
+  bool addedListener = false;
+
   @override
   Widget build(BuildContext context) {
     final articlesViewModel = Provider.of<ArticlesViewModel>(context);
-    return Container(
-      color: Colors.grey[100],
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-              ),
-              child: FutureBuilder(
-                future: ArticlesViewModel().getAllListElements(
-                  context,
-                  articlesViewModel.currentPage,
+    if (!ArticlesViewModel.didRequest) {
+      articlesViewModel.loadArticlesFromPage(context, 1);
+      page++;
+    }
+    addListenerToList(context);
+
+    if (ArticlesViewModel.didRequest || articlesViewModel.error) {
+      if (articlesViewModel.articles.isEmpty) {
+        return const SessionErrorMessage(message: LojongStrings.noArticles);
+      }
+      return ListView.separated(
+        padding: const EdgeInsets.all(24),
+        controller: scrollController,
+        itemCount: articlesViewModel.articles.length + 1,
+        separatorBuilder: (_, __) => const SizedBox(height: 24),
+        itemBuilder: (context, index) {
+          if (index == articlesViewModel.articles.length &&
+              page < articlesViewModel.pages) {
+            return const Padding(
+              padding: EdgeInsets.all(16),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: LojongColors.background,
                 ),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data!.isNotEmpty) {
-                        return ListView.separated(
-                          separatorBuilder: (_, __) => const SizedBox(
-                            height: 40,
-                          ),
-                          padding: const EdgeInsets.all(24),
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            final article = snapshot.data![index];
-                            return ArticleElement(article);
-                          },
-                        );
-                      } else {
-                        return const SessionErrorMessage(
-                          message: LojongStrings.noArticles,
-                        );
-                      }
-                    } else {
-                      return SessionErrorMessage(
-                        message: LojongStrings.networkError,
-                        reloadFunction: () => setState(() {}),
-                      );
-                    }
-                  } else {
-                    return const Loading();
-                  }
-                },
               ),
-            ),
-          ),
-          SessionPageSlider(
-            canDecrease: articlesViewModel.currentPage > 1,
-            canIncrease:
-                articlesViewModel.currentPage < articlesViewModel.pages,
-            onDecrease: () => articlesViewModel.previousPage(),
-            onIncrease: () => articlesViewModel.nextPage(),
-            currentPage: articlesViewModel.currentPage,
-          ),
-        ],
-      ),
-    );
+            );
+          } else if (index == articlesViewModel.articles.length) {
+            return const SizedBox();
+          }
+          return ArticleElement(articlesViewModel.articles[index]);
+        },
+      );
+    }
+    return const Loading();
+  }
+
+  void addListenerToList(BuildContext context) {
+    if (!addedListener) {
+      scrollController.addListener(() {
+        final position = scrollController.position;
+        final provider = Provider.of<ArticlesViewModel>(context, listen: false);
+        if (position.pixels == position.maxScrollExtent &&
+            page > 1 &&
+            page <= provider.pages) {
+          provider.loadArticlesFromPage(context, page);
+          page++;
+        }
+      });
+      if (!addedListener) {
+        setState(() {
+          addedListener = true;
+        });
+      }
+    }
   }
 }

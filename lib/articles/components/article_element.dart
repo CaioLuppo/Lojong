@@ -14,7 +14,7 @@ class ArticleElement extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "ARTIGO ${article.title.toUpperCase()}",
+          "ARTIGO ${article.title?.toUpperCase()}",
           style: Theme.of(context).textTheme.titleMedium,
           textAlign: TextAlign.center,
         ),
@@ -22,7 +22,7 @@ class ArticleElement extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: CachedNetworkImage(
-            imageUrl: article.imageUrl,
+            imageUrl: article.imageUrl ?? "",
             height: 192,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -33,7 +33,7 @@ class ArticleElement extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          article.text,
+          article.text ?? "",
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

@@ -1,22 +1,20 @@
 class ArticleElementModel {
-  final String text;
-  final String title;
-  final String imageUrl;
-  final int id;
+  String? text;
+  String? title;
+  String? imageUrl;
+  int? id;
 
   ArticleElementModel({
-    required this.id,
-    required this.text,
-    required this.title,
-    required this.imageUrl,
+    this.id,
+    this.text,
+    this.title,
+    this.imageUrl,
   });
 
-  factory ArticleElementModel.fromMap(Map<String, dynamic> map) {
-    return ArticleElementModel(
-      id: map["id"],
-      text: map["text"],
-      title: map["title"],
-      imageUrl: map["image_url"]
-    );
+  ArticleElementModel.fromMap(Map<String, dynamic> map) {
+    id = map["id"];
+    text = map["text"];
+    title = map["title"];
+    imageUrl = map["image_url"];
   }
 }
