@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lojong/articles/view/articles.view.dart';
+import 'package:lojong/quotes/view/quotes.view.dart';
 import 'package:lojong/page_navigator/components/lojong_appbar.dart';
 import 'package:lojong/page_navigator/components/page_slider.dart';
 import 'package:lojong/videos/view/videos.view.dart';
@@ -17,7 +18,7 @@ class _PageNavigatorState extends State<PageNavigator>
   final List<Widget> _tabsBody = [
     const VideosPage(),
     const ArticlesPage(),
-    Container(),
+    const QuotesPage(),
   ];
 
   @override
