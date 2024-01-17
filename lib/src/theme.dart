@@ -4,24 +4,41 @@ import 'package:lojong/src/colors.dart';
 abstract class LojongThemeData {
   static ThemeData get theme {
     return ThemeData(
-      textTheme: const TextTheme(
-        displaySmall: TextStyle(
+      textTheme: TextTheme(
+        displaySmall: const TextStyle(
           fontFamily: "Asap",
           fontWeight: FontWeight.bold,
           color: LojongColors.text,
           fontSize: 16,
         ),
-        bodyMedium: TextStyle(
+        bodyMedium: const TextStyle(
           fontFamily: "Asap",
           fontSize: 16,
-          color: LojongColors.text
+          color: LojongColors.text,
         ),
-        titleMedium: TextStyle(
+        bodySmall: TextStyle(
+          fontFamily: "Asap",
+          fontSize: 11,
+          color: LojongColors.authorColor,
+        ),
+        titleMedium: const TextStyle(
           fontFamily: "Asap",
           fontWeight: FontWeight.bold,
           fontSize: 18,
           color: LojongColors.text,
-        )
+        ),
+        titleLarge: const TextStyle(
+          fontFamily: "Asap",
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+          color: LojongColors.text,
+        ),
+        titleSmall: TextStyle(
+          fontFamily: "Asap",
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+          color: LojongColors.authorColor,
+        ),
       ),
     );
   }

@@ -3,7 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lojong/src/assets.dart';
 
 class LojongAppBar extends StatelessWidget {
-  const LojongAppBar({super.key});
+  final bool hideTitle;
+  final void Function()? onReturn;
+
+  const LojongAppBar({super.key, this.hideTitle = false, this.onReturn});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +19,17 @@ class LojongAppBar extends StatelessWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text(
-          "inspirações".toUpperCase(),
-          style: Theme.of(context)
-              .textTheme
-              .displaySmall
-              ?.copyWith(color: Colors.white),
-        ),
+        title: hideTitle
+            ? null
+            : Text(
+                "inspirações".toUpperCase(),
+                style: Theme.of(context)
+                    .textTheme
+                    .displaySmall
+                    ?.copyWith(color: Colors.white),
+              ),
         leading: IconButton(
-          onPressed: null,
+          onPressed: onReturn,
           icon: SvgPicture.asset(
             LojongIcons.arrowBack,
             height: 14,

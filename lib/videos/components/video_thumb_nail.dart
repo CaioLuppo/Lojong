@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lojong/insight/view/insight.view.dart';
 import 'package:lojong/model/video.model.dart';
 import 'package:lojong/src/assets.dart';
 
@@ -24,7 +25,15 @@ class VideoThumbNail extends StatelessWidget {
         placeholder: (_, __) => const ThumbPlaceHolder(),
         errorWidget: (_, __, ___) => const ThumbPlaceHolder(error: true),
         imageBuilder: (_, imageProvider) => InkWell(
-          onTap: null,
+          onTap: () => Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) => InsightView(content: video),
+              transitionDuration: const Duration(milliseconds: 300),
+              transitionsBuilder: (_, a, __, c) =>
+                  FadeTransition(opacity: a, child: c),
+            ),
+          ),
           child: Stack(
             children: [
               Image(

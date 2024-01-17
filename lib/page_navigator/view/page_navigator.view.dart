@@ -34,22 +34,28 @@ class _PageNavigatorState extends State<PageNavigator>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const LojongAppBar(),
+        const Hero(tag: "appbar", child: LojongAppBar()),
         const SizedBox(height: 4),
         PageSlider(_controller),
         Expanded(
-          child: Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+          child: Hero(
+            tag: "container",
+            child: Material(
+              type: MaterialType.transparency,
+              child: Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  color: Colors.white,
+                ),
+                child: TabBarView(
+                  controller: _controller,
+                  children: _tabsBody,
+                ),
               ),
-              color: Colors.white,
-            ),
-            child: TabBarView(
-              controller: _controller,
-              children: _tabsBody,
             ),
           ),
         ),
