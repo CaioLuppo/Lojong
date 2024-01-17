@@ -15,24 +15,36 @@ class ArticlesViewModel with ChangeNotifier {
   List<ArticleElementModel> articles = [];
 
   Future<void> loadArticlesFromPage(BuildContext context, int page) async {
-    final response = await _client.get("/articles2?page=$page");
-    if (response.data != null) {
-      if (context.mounted && !didRequest) {
-        didRequest = true;
-        final provider = Provider.of<ArticlesViewModel>(context, listen: false);
-        provider.updatePages(response.data["last_page"]);
+    try {
+      final response = await _client.get("/articles2?page=$page");
+      if (response.data != null) {
+        if (context.mounted && !didRequest) {
+          didRequest = true;
+          final provider =
+              Provider.of<ArticlesViewModel>(context, listen: false);
+          provider.updatePages(response.data["last_page"]);
+        }
+        for (Map<String, dynamic> article in response.data["list"]) {
+          articles.add(
+            ArticleElementModel.fromMap(article),
+          );
+        }
+      } else {
+        error = true;
       }
-      for (Map<String, dynamic> article in response.data["list"]) {
-        articles.add(
-          ArticleElementModel.fromMap(article),
-        );
-      }
+    } catch (_) {
+      error = true;
     }
     notifyListeners();
   }
 
   void updatePages(int pages) {
     this.pages = pages;
+    notifyListeners();
+  }
+
+  void setError(bool value) {
+    error = value;
     notifyListeners();
   }
 }

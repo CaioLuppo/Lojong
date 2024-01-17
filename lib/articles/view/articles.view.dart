@@ -22,13 +22,15 @@ class _ArticlesPageState extends State<ArticlesPage> {
   @override
   Widget build(BuildContext context) {
     final articlesViewModel = Provider.of<ArticlesViewModel>(context);
-    if (!ArticlesViewModel.didRequest) {
+    if (!ArticlesViewModel.didRequest && !articlesViewModel.error) {
       articlesViewModel.loadArticlesFromPage(context, 1);
-      page++;
+      if (!articlesViewModel.error) {
+        page++;
+      }
     }
     addListenerToList(context);
 
-    if (ArticlesViewModel.didRequest || articlesViewModel.error) {
+    if (ArticlesViewModel.didRequest) {
       if (articlesViewModel.articles.isEmpty) {
         return const SessionErrorMessage(message: LojongStrings.noArticles);
       }
@@ -52,6 +54,14 @@ class _ArticlesPageState extends State<ArticlesPage> {
             return const SizedBox();
           }
           return ArticleElement(articlesViewModel.articles[index]);
+        },
+      );
+    } else if (articlesViewModel.error) {
+      return SessionErrorMessage(
+        message: LojongStrings.networkError,
+        reloadFunction: () {
+          articlesViewModel.setError(false);
+          setState(() {});
         },
       );
     }
